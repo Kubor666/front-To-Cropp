@@ -1,37 +1,20 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-dark bg-primary">
-      <div class=" row nav">
-        <div class="col-sm nav-left">
-          logo
-        </div>
-        <div class="col-sm nav-middle">
-        </div>
-        <div class="col-sm nav-right">
-          buy
-        </div>
-      </div>
-    </nav>
-    <div class="row content">
-      <div class="col-sm">
-      </div>
-      <div class="col-sm">
-        <img alt="Vue logo" src="./assets/logo.png">
-        <HelloWorld msg="Welcome to Your Vue.js App"/>
-      </div>
-      <div class="col-sm">
-      </div>
-    </div>
+    <NavBar/>
+    <HelloWorld/>
+
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import NavBar from './components/navbar.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    NavBar
   }
 }
 </script>

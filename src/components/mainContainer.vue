@@ -14,14 +14,15 @@
       <div class="col-12 middle">
         <div class="file-section">
           <div class="send-file" v-cloak @drop.prevent="addFile" @dragover.prevent>
-            <i class="fas fa-plus fa-5x"></i>
-            <ul> 
-              <li v-for="file in files">
-                {{ file.name  }} ({{ file.size | kb }} kb) <button @click="removeFile(file)" title="Remove">X</button>
+            <i class="fas fa-plus fa-5x" @click="addFile"></i>
+            <ul class="uploadTable"> 
+              <li v-bind:key="file.name" v-for="file in files">
+                {{ file.name  }} ({{ (file.size/1024).toFixed(1) }} kb) <button @click="removeFile(file)" title="Remove">X</button>
               </li>
             </ul>
-            <button :disabled="uploadDisabled" @click="upload">Upload</button>
             <div class="regular-text">Drop the files here</div>
+            <input id="fileUpload" type="file" hidden>
+            <button class="btn btn-dark" @click="chooseFiles()">Choose</button>
           </div>
         </div>
       </div>
@@ -33,7 +34,9 @@
 export default {
   name: 'mainContainer',
   data() {
-    files:[]
+    return {
+      files: []
+    }
   },
 
   computed: {
@@ -51,6 +54,10 @@ export default {
       });
     },
 
+    chooseFiles() {
+        document.getElementById("fileUpload").click()
+    },
+
     removeFile(file){
       this.files = this.files.filter(f => {
         return f != file;
@@ -60,11 +67,11 @@ export default {
     upload() {
 
       let formData = new FormData();
-      this.files.forEach((f,x) => {
-        formData.append('file'+(x+1), f);
+      this.files.forEach(f => {
+        formData.append('imageUpload', f);
       });
 
-      fetch('https://httpbin.org/post', {
+      fetch('http://localhost:3000/', {
         method:'POST',
         body: formData
       })
@@ -81,9 +88,19 @@ export default {
 </script>
 
 <style lang="scss">
+
+.fas{
+}
+
 .file-section{
+  display: block;
+  overflow: auto;
   padding-top: 30px;
   padding-bottom: 20px;
+}
+
+.uploadTable{
+  margin-top: 1rem;
 }
 
 .secondary-text{
@@ -91,15 +108,18 @@ export default {
 }
 
 .send-file{
+  display: block;
+  overflow: auto;
   background-color: #fff;
   border-radius:15px;
-  height: 200px;
-  padding-top: 3em;
+  min-height: 200px;
+  padding-top: 2em;
+  padding-bottom: 2em;
 }
 
 .regular-text{
   color: #6F7882;
-  padding-top:20px;
+  padding-bottom: 0.5em;
 }
-
+// :disabled="uploadDisabled" @click="upload"
 </style>

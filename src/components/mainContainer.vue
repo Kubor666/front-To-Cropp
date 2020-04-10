@@ -14,15 +14,16 @@
       <div class="col-12 middle">
         <div class="file-section">
           <div class="send-file" v-cloak @drop.prevent="addFile" @dragover.prevent>
-            <i class="fas fa-plus fa-5x" @click="addFile"></i>
+            <i class="fas fa-plus fa-5x" @click="chooseFiles"></i>
             <ul class="uploadTable"> 
               <li v-bind:key="file.name" v-for="file in files">
-                {{ file.name  }} ({{ (file.size/1024).toFixed(1) }} kb) <button @click="removeFile(file)" title="Remove">X</button>
+                {{ file.name  }} ({{ (file.size/1024).toFixed(1) }} kb) <i class="fas fa-trash" @click="removeFile(file)" title="Remove"></i>
               </li>
             </ul>
             <div class="regular-text">Drop the files here</div>
-            <input id="fileUpload" type="file" hidden>
-            <button class="btn btn-dark" @click="chooseFiles()">Choose</button>
+            <input id="fileUpload" type="file" @change='previewFiles' hidden>
+            <button class="btn btn-dark choose" @click="chooseFiles">Choose</button>
+            <button class="btn btn-dark upload" :disabled="uploadDisabled" @click="upload">Upload</button>
           </div>
         </div>
       </div>
@@ -54,9 +55,13 @@ export default {
       });
     },
 
+    previewFiles(event) {
+     this.files = [...this.files, ...event.target.files]
+   },
+
     chooseFiles() {
-        document.getElementById("fileUpload").click()
-    },
+        document.getElementById("fileUpload").click();
+      },
 
     removeFile(file){
       this.files = this.files.filter(f => {
@@ -89,7 +94,12 @@ export default {
 
 <style lang="scss">
 
+.choose{
+  margin-right: 20px;
+}
+
 .fas{
+  cursor: pointer;
 }
 
 .file-section{
@@ -99,8 +109,13 @@ export default {
   padding-bottom: 20px;
 }
 
+.send-file:hover{
+  box-shadow: 0 12px 12px 0 rgba(#000, 0.25),  0 9px 6px 0 rgba(#000, 0.22);
+}
+
 .uploadTable{
   margin-top: 1rem;
+  list-style-type: none;
 }
 
 .secondary-text{
@@ -115,11 +130,11 @@ export default {
   min-height: 200px;
   padding-top: 2em;
   padding-bottom: 2em;
+  box-shadow: 0 10px 10px 0 rgba(#000, 0.19), 0 6px 3px 0 rgba(#000, 0.23)
 }
 
 .regular-text{
   color: #6F7882;
   padding-bottom: 0.5em;
 }
-// :disabled="uploadDisabled" @click="upload"
 </style>

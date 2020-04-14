@@ -5,18 +5,22 @@
 
     </mainContainer>
 
+    <ads/>
+
   </div>
 </template>
 
 <script>
 import mainContainer from './components/mainContainer.vue'
 import NavBar from './components/navbar.vue'
+import ads from './components/ads.vue'
 
 export default {
   name: 'App',
   components: {
     mainContainer,
-    NavBar
+    NavBar,
+    ads
   }
 }
 </script>
@@ -28,7 +32,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background: #eee;
+  background: #fff;
 }
 .container-mainContent{
   max-width:100%;

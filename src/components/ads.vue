@@ -2,13 +2,11 @@
     <div id="ad_container" class="container py-5">
         <div class="row">
             <div class="col-2 left">
-                gowno
             </div>
             <div class="col-8 mid">
-                cguj
+                <h2>Tu będą reklamy ziomek</h2>
             </div>
             <div class="col-2 right">
-                mercedes
             </div>
 
         </div>
@@ -24,7 +22,7 @@ export default {
 
 <style lang='scss'>
     #ad_containter{
-        background-color: #fff;
+        background: #000 !important;
     }
     
 </style>

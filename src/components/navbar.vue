@@ -25,8 +25,10 @@ export default {
 
 <style lang="scss">
 .navbar{
+  color: #fff;
   height: 70px;
   font-size: 2.5rem;
+
 }
 
 .nav-middle{
@@ -46,6 +48,6 @@ export default {
   margin: auto;
 }
 .bg-primary{
-  background-color: #fff !important;
+  background-color: #056CF2 !important;
 }
 </style>

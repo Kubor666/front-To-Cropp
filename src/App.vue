@@ -7,6 +7,8 @@
 
     <ads/>
 
+    <NavFooter/>
+
   </div>
 </template>
 
@@ -14,13 +16,15 @@
 import mainContainer from './components/mainContainer.vue'
 import NavBar from './components/navbar.vue'
 import ads from './components/ads.vue'
+import NavFooter from './components/footer.vue'
 
 export default {
   name: 'App',
   components: {
     mainContainer,
     NavBar,
-    ads
+    ads,
+    NavFooter
   }
 }
 </script>

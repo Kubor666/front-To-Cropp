@@ -96,16 +96,23 @@ export default {
 
 <style lang="scss">
 
+.btn {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
 #king-container{
   background-color: #eee;
 }
 
 .choose{
   margin-right: 20px;
+  background-color: #0554F2;
+  border-color: #0554F2;
 }
 
 .fas{
   cursor: pointer;
+  color: #F24822;
 }
 
 .file-section{
@@ -113,6 +120,11 @@ export default {
   overflow: auto;
   padding-top: 30px;
   padding-bottom: 20px;
+}
+
+.upload{
+  background-color: #0554F2;
+  border-color: #0554F2;
 }
 
 

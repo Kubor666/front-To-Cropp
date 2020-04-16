@@ -48,6 +48,6 @@ export default {
   margin: auto;
 }
 .bg-primary{
-  background-color: #056CF2 !important;
+  background-color: #529DFF !important;
 }
 </style>

@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import { saveAs } from 'file-saver'
+
 export default {
   name: 'mainContainer',
   data() {
@@ -82,9 +84,14 @@ export default {
         method:'POST',
         body: formData
       })
-      .then(res => res.json())
       .then(res => {
-        console.log('done uploading', res);
+        res.blob().then(blob => {
+        const file = new File([blob], "bardzoproszeTwojPlik.png", {type: "png", lastModified: Date.now()});
+
+        console.log({ blob })
+
+        saveAs(file)
+        })
       })
       .catch(e => {
         console.error(JSON.stringify(e.message));
@@ -102,17 +109,19 @@ export default {
 
 #king-container{
   background-color: #eee;
+  box-shadow: inset 0 3px 3px 0 rgba(#000, 0.23) ;
+  box-shadow: inset 0 -.125rem .25rem rgba(0,0,0,.075)!important;
 }
 
 .choose{
   margin-right: 20px;
-  background-color: #0554F2;
-  border-color: #0554F2;
+  background-color: #0571FF;
+  border-color: #0571FF;
 }
 
 .fas{
   cursor: pointer;
-  color: #F24822;
+  color: #0571FF;
 }
 
 .file-section{

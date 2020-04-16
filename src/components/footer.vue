@@ -26,10 +26,10 @@ export default {
 
 	#footer{
 		color: #fff;
-		position: absolute;
+		position: fixed;
 		bottom: 0px;
 		width: 100%;
-		background: #056CF2;
+		background: #529DFF;
 	}
 
 	.foot-color{

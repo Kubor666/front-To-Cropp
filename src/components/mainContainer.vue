@@ -74,11 +74,10 @@ export default {
     },
 
     upload() {
-
-      let formData = new FormData();
       this.files.forEach(f => {
+        let formData = new FormData();
+        let file_name= f.name
         formData.append('imageUpload', f);
-      });
 
       fetch('http://localhost:3000/', {
         method:'POST',
@@ -86,7 +85,7 @@ export default {
       })
       .then(res => {
         res.blob().then(blob => {
-        const file = new File([blob], "bardzoproszeTwojPlik.png", {type: "png", lastModified: Date.now()});
+        const file = new File([blob], "afterconversion"+file_name, {type: "png", lastModified: Date.now()});
 
         console.log({ blob })
 
@@ -95,6 +94,7 @@ export default {
       })
       .catch(e => {
         console.error(JSON.stringify(e.message));
+      });
       });
     }
   }

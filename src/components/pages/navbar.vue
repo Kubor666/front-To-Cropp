@@ -4,12 +4,12 @@
       <div class="row nav">
         <div class='container'>
           <div class="col-2 nav-left">
-            logo
+            <router-link :to="'/'">logo</router-link>
           </div>
           <div class="col-8 nav-middle">
           </div>
           <div class="col-2 nav-right">
-            buy
+           <router-link :to="'buy'">buy</router-link>
           </div>
         </div>
       </div>
@@ -24,6 +24,16 @@ export default {
 </script>
 
 <style lang="scss">
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+a:hover{
+  color:inherit;
+  text-decoration: inherit;
+}
+
 .navbar{
   color: #fff;
   height: 70px;

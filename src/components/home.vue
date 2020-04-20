@@ -1,0 +1,42 @@
+<template>
+  <div id="home">
+    <mainContainer/>
+    <ads/>
+  </div>
+</template>
+
+<script>
+import mainContainer from './pages/mainContainer.vue'
+import ads from './pages/ads.vue'
+
+
+export default {
+  name: 'Home',
+  components: {
+    mainContainer,
+    ads
+  }
+}
+</script>
+
+<style>
+#home {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  background: #fff;
+}
+.container-mainContent{
+  max-width:100%;
+}
+
+.content{
+  width: 80%;
+  margin: auto;
+  margin-top: 60px;
+}
+
+
+</style>

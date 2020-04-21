@@ -6,14 +6,38 @@
           <div class="col-2 nav-left">
             <router-link :to="'/'">logo</router-link>
           </div>
-          <div class="col-8 nav-middle">
+          <div class="col-7 nav-middle">
           </div>
-          <div class="col-2 nav-right">
+          <div class="col-2 nav-login">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">login
+              </button>
+          </div>
+          <div class="col-1 nav-right">
            <router-link :to="'buy'">buy</router-link>
           </div>
         </div>
       </div>
     </nav>
+    <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
   </div>
 </template>
 
@@ -49,8 +73,13 @@ a:hover{
   width: 10%;
 }
 
+.nav-login{
+  text-align: center;
+}
+
 .nav-right{
   width: 10%;
+  text-align: right;
 }
 
 .nav{

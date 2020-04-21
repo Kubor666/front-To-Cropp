@@ -1,20 +1,17 @@
 <template>
   <div id="home">
     <mainContainer/>
-    <ads/>
   </div>
 </template>
 
 <script>
 import mainContainer from './pages/mainContainer.vue'
-import ads from './pages/ads.vue'
 
 
 export default {
   name: 'Home',
   components: {
     mainContainer,
-    ads
   }
 }
 </script>

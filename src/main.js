@@ -4,6 +4,7 @@ import App from './App'
 
 import Home from './components/home'
 import Buy from './components/pages/buy'
+import store from './store/index'
 
 Vue.config.productionTip = false
 
@@ -19,5 +20,6 @@ const router = new VueRouter({
 
 new Vue({
   render: h => h(App),
-  router
+  router,
+  store
 }).$mount('#app')

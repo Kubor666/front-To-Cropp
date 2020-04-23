@@ -9,8 +9,7 @@
           <div class="col-7 nav-middle">
           </div>
           <div class="col-2 nav-login">
-            <button type="button" class="btn btn-primary" @click='changeModalState'>login
-              </button>
+            <div @click="changeModalState"> login </div>
           </div>
           <div class="col-1 nav-right">
            <router-link :to="'buy'">buy</router-link>
@@ -72,6 +71,7 @@ a:hover{
 
 .nav-login{
   text-align: center;
+  cursor: pointer;
 }
 
 .nav-right{

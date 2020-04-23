@@ -1,40 +1,56 @@
 <template>
 <transition name="modal-fade">
     <div class="modal-backdrop">
-        <div class="modal">
-        <header class="modal-header">
-            <slot name="header">
-            This is the default tile!
-
-            <button
-                type="button"
-                class="btn-close"
-                @click="changeModalState"
-            >
-                x
-            </button>
-            </slot>
-        </header>
-        <section class="modal-body">
-            <slot name="body">
-            I'm the default body!
-            </slot>
-        </section>
-        <footer class="modal-footer">
-            <slot name="footer">
-                I'm the default footer!
-
-                <button
-                type="button"
-                class="btn-green"
-                @click="changeModalState"
-                >
-                Close me!
-            </button>
-            </slot>
-        </footer>
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title text-xs-center">Log in like a Boss</h4>
+              <button type="button" class="close" @click='changeModalState'>
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form role="form" method="POST" action="">
+                <input type="hidden" name="_token" value="">
+                <div class="form-group">
+                  <label class="control-label">E-Mail Address</label>
+                    <div>
+                      <input type="email" class="form-control input-lg" name="email" value="">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Password</label>
+                      <div>
+                        <input type="password" class="form-control input-lg" name="password">
+                      </div>
+                  </div>
+                  <div class="form-group">
+                    <div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="remember"> Remember Me
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div>
+                      <button type="submit" class="btn btn-dark btn-block login">Login</button>
+                    </div>
+                  </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+                <div class=" forgot-password_footer">
+                  <a href="">Forgot Your Password?</a>
+                </div>
+                <div class=" sign-up_footer">
+                Don't have an account? <a href="/auth/register">Sign up »</a>
+                </div>
+            </div>
         </div>
     </div>
+      </div>
 </transition>    
 </template>
 
@@ -66,9 +82,9 @@ export default {
 
 .modal-backdrop {
     position: fixed;
-    top: 2rem;
+    top: 0;
     bottom: 0;
-    left: 50%;
+    left: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.3);
     display: flex;
@@ -76,55 +92,29 @@ export default {
     align-items: center;
   }
 
-  .modal {
-    background: #FFFFFF;
-    box-shadow: 2px 2px 20px 1px;
-    overflow-x: auto;
-    display: flex;
-    height: 300px;
-    width:300px;
-    flex-direction: column;
+  .modal-lg {
+    max-width: 50% !important;
+    margin: 0;
+    width: 80%;
   }
 
-  .modal-header,
-  .modal-footer {
-    padding: 15px;
-    display: flex;
+  .modal-footer{
+    align-items: left;
   }
 
-  .modal-header {
-    border-bottom: 1px solid #eeeeee;
-    color: #4AAE9B;
-    justify-content: space-between;
+  .login{
+    background-color: #0571FF;
+    border-color: #0571FF;
+    margin-top: 20px;
   }
 
-  .modal-footer {
-    border-top: 1px solid #eee;
-    color: #000;
-    justify-content: flex-end;
+  .sign-up_footer{
+    float: right;
+    text-align: right;
   }
 
-  .modal-body {
-    color: #000;
-    position: relative;
-    padding: 20px 10px;
-  }
-
-  .btn-close {
-    border: none;
-    font-size: 20px;
-    padding: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    color: #4AAE9B;
-    background: transparent;
-  }
-
-  .btn-green {
-    color: white;
-    background: #4AAE9B;
-    border: 1px solid #4AAE9B;
-    border-radius: 2px;
+  .forgot-password_footer{
+    margin-left: 0;
   }
 
 </style>

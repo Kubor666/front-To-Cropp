@@ -4,6 +4,7 @@ import App from './App'
 
 import Home from './components/home'
 import Buy from './components/pages/buy'
+import register from './components/pages/register'
 import store from './store/index'
 
 Vue.config.productionTip = false
@@ -15,6 +16,7 @@ const router = new VueRouter({
   routes: [
     { path: '/', component: Home, name: 'home' },
     { path: '/buy', component: Buy },
+    { path: '/auth/register', component: register}
   ]
 })
 

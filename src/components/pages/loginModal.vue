@@ -99,7 +99,10 @@ export default {
   }
 
   .modal-footer{
-    align-items: left;
+    display: flex;                /* make container a flexbox */
+    justify-content: center;      /* center child elements ("flex items") */
+    position: relative;
+    padding-bottom: 25px;
   }
 
   .login{
@@ -109,12 +112,15 @@ export default {
   }
 
   .sign-up_footer{
-    float: right;
-    text-align: right;
+    position: absolute;
+    right: 10px;
+    bottom: 0px;
   }
 
   .forgot-password_footer{
-    margin-left: 0;
+    position: absolute;
+    left: 10px;
+    bottom: 0px;
   }
 
 </style>

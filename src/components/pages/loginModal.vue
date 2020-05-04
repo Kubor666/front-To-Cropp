@@ -10,18 +10,18 @@
               </button>
             </div>
             <div class="modal-body">
-              <form role="form" method="POST" action="">
+              <form role="form">
                 <input type="hidden" name="_token" value="">
                 <div class="form-group">
                   <label class="control-label">E-Mail Address</label>
                     <div>
-                      <input type="email" class="form-control input-lg" name="email" value="">
+                      <input type="email" class="form-control input-lg" v-model="this.login" name="email" value="">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="control-label">Password</label>
                       <div>
-                        <input type="password" class="form-control input-lg" name="password">
+                        <input type="password" class="form-control input-lg" v-model="this.password" name="password">
                       </div>
                   </div>
                   <div class="form-group">
@@ -35,7 +35,7 @@
                   </div>
                   <div class="form-group">
                     <div>
-                      <button type="submit" class="btn btn-dark btn-block login">Login</button>
+                      <button type="submit" class="btn btn-dark btn-block login" @click="sendAuth()">Login</button>
                     </div>
                   </div>
               </form>
@@ -57,10 +57,23 @@
 <script>
 export default {
     name: 'modal',
+    data () {
+      return {
+        credentials: {
+          login: '',
+          password: ''
+
+        }
+      }
+    },
 
     methods: {
     changeModalState () {
       this.$store.commit('toggleModal')
+    },
+
+    sendAuth() {
+      
     }
   }
     

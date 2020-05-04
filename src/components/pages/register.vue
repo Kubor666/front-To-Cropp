@@ -4,7 +4,7 @@
         <div class="row">
 
             <div class="col-md-12 col-md-offset-2">
-                <form role="form" method="POST" action="#">
+                <form role="form">
 
                     <h2 class="text-center">Register</h2>
 
@@ -14,12 +14,12 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="first_name">First name</label>
-                                <input type="text" class="form-control" name="" id="first_name" placeholder="First Name">
+                                <input type="text" class="form-control" v-model="credentials.first_name" name="" id="first_name" placeholder="First Name">
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="last_name">Last name</label>
-                                <input type="text" class="form-control" name="last_name" id="" placeholder="Last Name">
+                                <input type="text" class="form-control" v-model="credentials.last_name" name="last_name" placeholder="Last Name">
                             </div>
                         </div>
 
@@ -27,58 +27,24 @@
                         <div class="row">
                             <div class="form-group col-md-12">
                                 <label for="">Email</label>
-                                <input type="email" class="form-control" name="" id="" placeholder="Email">
-                            </div>
+                                <input type="email" class="form-control" v-model="credentials.email" name="email"  placeholder="Email">                           </div>
                         </div>
 
 
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="password">Password</label>
-                                <input type="password" class="form-control" name="" id="password" placeholder="Password">
+                                <input type="password" class="form-control" v-model="credentials.password" name="password" id="password" placeholder="Password">
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="confirm_password">Confirm Password</label>
-                                <input type="password" class="form-control" name="" id="confirm_password" placeholder="Confirm Password">
+                                <input type="password" class="form-control" ref="password" name="" id="confirm_password" placeholder="Confirm Password">
                             </div>
                         </div>
 
 
                     </fieldset>
-
-                    <fieldset>
-                        <legend>Optional Details</legend>
-
-
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="country">Country of Residence</label>
-                                <select class="form-control" name="" id="country">
-                                    <option>Country 1</option>
-                                    <option>Country 2</option>
-                                    <option>Country 3</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <label for="found_site">How did you find out about the site?</label>
-                                <select class="form-control" name="" id="found_site">
-                                    <option>Company</option>
-                                    <option>Friend</option>
-                                    <option>Colleague</option>
-                                    <option>Advertisement</option>
-                                    <option>Google Search</option>
-                                    <option>Online Article</option>
-                                    <option value="other" >Other</option>
-                                </select>
-                            </div>
-                        </div>
-
-                    </fieldset>
-
                     <div class="row">
                         <div class="form-group">
                             <div class="col-md-12">
@@ -95,7 +61,7 @@
                     <div class="row">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" @click=sendForm()>
                                     Register
                                 </button>
                                 <p class="haveAccount" @click="changeModalState">Already have an account?</p>
@@ -112,13 +78,40 @@
 
 <script>
 export default {
-    
-
+    data() {
+        return{
+            credentials:{
+                first_name: '',
+                last_name:'',
+                email:'',
+                password:'',
+                errors: []
+            }
+        }
+    },
     methods: {
     changeModalState () {
       this.$store.commit('toggleModal')
+    },
+    sendForm (){
+        console.log(this.credentials);
+        fetch('http://localhost:3000/login/api/register', {
+        method:'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(this.credentials)
+      })
+        .then(json => console.log(json))
+        .then(function (data) {
+             console.log('Request succeeded with JSON response', data);
+         })
+        .catch(function (error) {
+            console.log('Request failed', error);
+         })
+        
     }
-  }
+}
 }
 </script>
 

@@ -15,13 +15,13 @@
                 <div class="form-group">
                   <label class="control-label">E-Mail Address</label>
                     <div>
-                      <input type="email" class="form-control input-lg" v-model="this.login" name="email" value="">
+                      <input type="email" class="form-control input-lg" v-model="credentials.email" name="email" value="">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="control-label">Password</label>
                       <div>
-                        <input type="password" class="form-control input-lg" v-model="this.password" name="password">
+                        <input type="password" class="form-control input-lg" v-model="credentials.password" name="password">
                       </div>
                   </div>
                   <div class="form-group">
@@ -60,7 +60,7 @@ export default {
     data () {
       return {
         credentials: {
-          login: '',
+          email: '',
           password: ''
 
         }
@@ -73,6 +73,21 @@ export default {
     },
 
     sendAuth() {
+      console.log(this.credentials);
+        fetch('http://localhost:3000/login/api/authenticate', {
+        method:'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(this.credentials)
+      })
+        .then(json => console.log(json))
+        .then(function (data) {
+             console.log('Request succeeded with JSON response', data);
+         })
+        .catch(function (error) {
+            console.log('Request failed', error);
+         })
       
     }
   }

@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state:{
-        token: localStorage.getItem('user-token') || '',
+        token: localStorage ? localStorage.getItem('user-token') : '',
         status: '',
     },
 
@@ -15,7 +15,7 @@ export default new Vuex.Store({
     },
 
     actions: {
-        [AUTH_REQUEST]: ({commit, dispatch}, user) => {
+        [AUTH_REQUEST]: ({state, commit, dispatch}, user) => {
             return new Promise((resolve, reject) => {
               commit(AUTH_REQUEST)
               fetch('http://localhost:3000/login/api/register', {
@@ -24,9 +24,8 @@ export default new Vuex.Store({
                 })
               .then(resp => {
                   const token = resp.data.token
-                  localStorage.setItem('user-token', token)
+                  localStorage.setItem('user-token', state.token)
                   commit(AUTH_SUCCESS, token)
-
                   dispatch(USER_REQUEST)
                   resolve(resp)
               })
@@ -35,6 +34,14 @@ export default new Vuex.Store({
                   localStorage.removeItem('user-token')
                   reject(err)
               })  
+            })
+        },
+
+        [AUTH_LOGOUT]: ({commit, dispatch}) => {
+            return new Promise((resolve, reject) => {
+                commit(AUTH_LOGOUT)
+                localStorage.removeItem('user-token')
+                resolve()
             })
         }
     },

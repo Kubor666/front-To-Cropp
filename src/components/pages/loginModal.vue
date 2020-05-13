@@ -10,19 +10,40 @@
               </button>
             </div>
             <div class="modal-body">
-              <form role="form">
+              <form role="form" @submit.prevent="handleLogin">
                 <input type="hidden" name="_token" value="">
                 <div class="form-group">
-                  <label class="control-label">E-Mail Address</label>
+                  <label for="username" class="control-label">E-Mail Address</label>
                     <div>
-                      <input type="email" class="form-control input-lg" v-model="credentials.email" name="email" value="">
+                      <input
+                        type="email"
+                        class="form-control input-lg"
+                        v-model="user.username"
+                        v-validate="'required'"
+                        name="username"
+                        />
                     </div>
+                    <div
+                      v-if="error.has('username')"
+                      class="alert alert-danger"
+                      role="alert"
+                      >Username is required!</div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label">Password</label>
+                    <label for="password" class="control-label">Password</label>
                       <div>
-                        <input type="password" class="form-control input-lg" v-model="credentials.password" name="password">
+                        <input
+                          type="password"
+                          class="form-control input-lg"
+                          v-model="user.password"
+                          v-validate="'required'"
+                          name="password">
                       </div>
+                      <div
+                        v-if="errors.has('password')"
+                        class="alert alert-danger"
+                        role="alert"
+                      >Password is required!</div>
                   </div>
                   <div class="form-group">
                     <div>
@@ -34,9 +55,13 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <div>
-                      <button type="submit" class="btn btn-dark btn-block login" @click="sendAuth()">Login</button>
-                    </div>
+                      <button class="btn btn-dark btn-block login" :disabled="loading">
+                        <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+                        <span>Login</span>
+                      </button>
+                  </div>
+                  <div class="form-group">
+                    <div v-if="message" class="alert alert-danger" role="alert">{{message}}</div>
                   </div>
               </form>
             </div>
@@ -55,39 +80,62 @@
 </template>
 
 <script>
+import User from '../../models/user'
+
 export default {
     name: 'modal',
     data () {
       return {
-        credentials: {
-          email: '',
-          password: ''
-
-        }
+        user: new User('', ''),
+        loading: false,
+        message: ''
       }
     },
 
-    methods: {
-    changeModalState () {
-      this.$store.commit('toggleModal')
+    computed: {
+      loggedIn() {
+        return this.$store.state.auth.status.loggedIn;
+      }
     },
+    created() {
+      if (this.loggedIn) {
+        this.$router.push('/profile');
+      }
+    },
+    methods: {
+      handleLogin() {
+        this.loading = true;
+        this.$validator.validateAll().then(isValid => {
+          if(!isValid) {
+            this.loading = false;
+            return;
+          }
+          
+          if(this.user.username && this.user.password) {
+            this.$store.dispatch('auth/login', this.user).then(
+              () => {
+                this.$router.push('/profile');
+              },
+              error => {
+                this.loading = false;
+                this.message =
+                  (error.response && err.response.data) ||
+                  error.message ||
+                  error.toString();
+              }
+            );
+          }
+        });
+      },
+
+      changeModalState () {
+        this.$store.commit('toggleModal')
+      },
 
     sendAuth() {
-      console.log(this.credentials);
-        fetch('http://localhost:3000/login/api/authenticate', {
-        method:'POST',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(this.credentials)
+      this.$store.dispatch('AUTH_REQUEST', this.credentials).then(() => {
+        this.$router.push('boatever')
       })
-        .then(json => console.log(json))
-        .then(function (data) {
-             console.log('Request succeeded with JSON response', data);
-         })
-        .catch(function (error) {
-            console.log('Request failed', error);
-         })
       
     }
   }

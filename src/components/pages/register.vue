@@ -137,13 +137,17 @@ export default {
         this.message = '';
         this.submitted = true;
         this.$validator.validate().then(isValid => {
+            console.log('validator runn')
             if (isValid) {
+                console.log('sprawdzanko')
                 this.$store.dispatch('auth/register', this.user).then(
+                    console.log('sukcesik'),
                     data => {
                         this.message = data.message;
                         this.succesful = true;
                     },
                     error => {
+                        console.log('unsukcesik')
                         this.message =
                             (error.response && error.response.data) ||
                             error.message ||

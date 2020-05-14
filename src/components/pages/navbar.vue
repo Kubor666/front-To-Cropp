@@ -14,10 +14,27 @@
           <div class="col-1 nav-right">
            <router-link :to="'buy'">buy</router-link>
           </div>
+
+          <div v-if="currentUser" class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <router-link to="/profile" class="nav-link">
+                {{ currentUser.username }}
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href @click.prevent="logOut">
+                logOut
+              </a>
+            </li>
+          </div>
         </div>
       </div>
     </nav>
     <modal v-show="showModal"/>
+    <div class="container">
+      <router-view />
+    </div>
+
   </div>
 </template>
 
@@ -31,11 +48,30 @@ export default {
   },
 
   computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
+    },
+    showAdminBoard() {
+      if (this.currentUser && this.currentUser.roles) {
+        return this.currentUser.roles.includes('ROLE_ADMIN');
+      }
+      return false;
+    },
+    showModeratorBoard() {
+      if (this.currentUser && this.currentUser.roles) {
+        return this.currentUser.roles.includes('ROLE_MODERATOR');
+      }
+      return false;
+    },
     showModal () {
       return this.$store.state.showModal
     }
   },
   methods: {
+    logOut() {
+      this.$store.dispatch('auth/login');
+      this.$router.push('/login');
+    },
     changeModalState () {
       this.$store.commit('toggleModal')
     }

@@ -119,7 +119,7 @@ export default {
               error => {
                 this.loading = false;
                 this.message =
-                  (error.response && err.response.data) ||
+                  (error.response && error.response.data) ||
                   error.message ||
                   error.toString();
               }
@@ -131,13 +131,6 @@ export default {
       changeModalState () {
         this.$store.commit('toggleModal')
       },
-
-    sendAuth() {
-      this.$store.dispatch('AUTH_REQUEST', this.credentials).then(() => {
-        this.$router.push('boatever')
-      })
-      
-    }
   }
     
 }

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './components/Home'
 import Register from './components/pages/Register'
+import Profile from './components/pages/Profile'
 
 Vue.use(Router);
 
@@ -25,7 +26,7 @@ export const router = new Router({
             path: '/profile',
             name: 'profile',
             //lazy-loaded
-            component: () => import('./components/pages/Profile.vue')
+            component: Profile
         },
         {
             path: '/admin',

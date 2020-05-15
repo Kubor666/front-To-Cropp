@@ -1,12 +1,12 @@
 <template>
   <div id="navi">
-    <nav class="navbar navbar-dark bg-primary">
+    <nav class="navbar navbar-expand navbar-dark bg-primary">
       <div class="row nav">
         <div class='container'>
           <div class="col-2 nav-left">
             <router-link :to="'/'">logo</router-link>
           </div>
-          <div class="col-7 nav-middle">
+          <div class="col-5 nav-middle">
           </div>
           <div class="col-2 nav-login">
             <div @click="changeModalState"> login </div>
@@ -31,10 +31,6 @@
       </div>
     </nav>
     <modal v-show="showModal"/>
-    <div class="container">
-      <router-view />
-    </div>
-
   </div>
 </template>
 
@@ -69,8 +65,8 @@ export default {
   },
   methods: {
     logOut() {
-      this.$store.dispatch('auth/login');
-      this.$router.push('/login');
+      this.$store.dispatch('auth/logout');
+      this.$router.push('/home');
     },
     changeModalState () {
       this.$store.commit('toggleModal')

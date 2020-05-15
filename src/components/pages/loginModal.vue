@@ -16,18 +16,13 @@
                   <label for="username" class="control-label">E-Mail Address</label>
                     <div>
                       <input
-                        type="email"
+                        type="text"
                         class="form-control input-lg"
                         v-model="user.username"
                         v-validate="'required'"
                         name="username"
                         />
                     </div>
-                    <div
-                      v-if="error.has('username')"
-                      class="alert alert-danger"
-                      role="alert"
-                      >Username is required!</div>
                   </div>
                   <div class="form-group">
                     <label for="password" class="control-label">Password</label>
@@ -39,11 +34,11 @@
                           v-validate="'required'"
                           name="password">
                       </div>
-                      <div
-                        v-if="errors.has('password')"
+                     <div
+                        v-if="message"
                         class="alert alert-danger"
                         role="alert"
-                      >Password is required!</div>
+                      >{{ message }}</div>
                   </div>
                   <div class="form-group">
                     <div>
@@ -114,6 +109,7 @@ export default {
           if(this.user.username && this.user.password) {
             this.$store.dispatch('auth/login', this.user).then(
               () => {
+                this.$store.commit('toggleModal')
                 this.$router.push('/profile');
               },
               error => {

@@ -13,7 +13,7 @@
                             <legend>Account Details</legend>
 
                             <div class="row">
-                                <div class="form-group">
+                                <div class="form-group col-md-6">
                                     <label for="username">Username</label>
                                     <input
                                         v-model="user.username"

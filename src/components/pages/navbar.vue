@@ -76,8 +76,9 @@ export default {
 </script>
 
 <style lang="scss">
+
 a {
-  color: inherit;
+  color: inherit !important;
   text-decoration: inherit;
 }
 

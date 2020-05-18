@@ -36,7 +36,7 @@
               <li><span class="fa-li"><i class="fas fa-check"></i></span>dummy point</li>
               <li><span class="fa-li"><i class="fas fa-check"></i></span>dummy point</li>
             </ul>
-            <a href="#" class="btn btn-block btn-primary text-uppercase">Buy now !</a>
+            <a href="/register" class="btn btn-block btn-primary text-uppercase">Buy now !</a>
           </div>
         </div>
       </div>

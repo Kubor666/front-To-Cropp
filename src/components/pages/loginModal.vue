@@ -1,7 +1,6 @@
 <template>
 <transition name="modal-fade">
-    <div class="modal-backdrop">
-        <div class="modal-dialog modal-lg">
+  <div class="modal-backdrop">
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title text-xs-center">Log in like a Boss</h4>
@@ -65,12 +64,11 @@
                   <a href="">Forgot Your Password?</a>
                 </div>
                 <div class=" sign-up_footer">
-                Don't have an account? <a href="/auth/register">Sign up »</a>
+                Don't have an account? <a href="/register">Sign up »</a>
                 </div>
             </div>
         </div>
-    </div>
-      </div>
+  </div>
 </transition>    
 </template>
 
@@ -144,6 +142,10 @@ export default {
     transition: opacity .5s ease
   }
 
+  .modal-content{
+    max-width: 50%;
+  }
+
 
 .modal-backdrop {
     position: fixed;
@@ -168,6 +170,7 @@ export default {
     justify-content: center;      /* center child elements ("flex items") */
     position: relative;
     padding-bottom: 25px;
+    min-height: 40px;
   }
 
   .login{

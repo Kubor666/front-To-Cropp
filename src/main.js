@@ -25,16 +25,7 @@ Vue.use(VeeValidate);
 
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
-/*
-const router = new VueRouter({
-  mode: 'history',
-  routes: [
-    { path: '/', component: Home, name: 'home' },
-    { path: '/buy', component: Buy },
-    { path: '/auth/register', component: register}
-  ]
-})
-*/
+
 new Vue({
   render: h => h(App),
   router,
